@@ -16,6 +16,7 @@ function App() {
     else if(name && isediting){
 
     }else {
+      showAlert(true, 'success', ' item added to the list')
       const newItem = {id: new Date().getTime().toString(),title: name}
       setList([...list, newItem])
       setName('')
@@ -26,6 +27,10 @@ const showAlert = (show = false, type="", msg=""){
   setAlert({show: show, type, msg})
 
 } 
+const clearlist = () => {
+  showAlert(true, 'danger', 'empty list')
+  setList ([])
+}
 
   return <section className="section-center">
             <form className='gocery-form' onSubmit={handleSubmit}>
@@ -42,7 +47,7 @@ const showAlert = (show = false, type="", msg=""){
             {list.length > 0 && (
               <div className="grocery-container">
               <List items = {list} />
-              <button className='clear-btn' >clear items</button>
+              <button className='clear-btn' onClick={clearlist}>clear items</button>
             </div>
 
             )}
